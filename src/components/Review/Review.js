@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   getDatabaseCart,
-  processOrder,
   removeFromDatabaseCart,
 } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
@@ -10,8 +9,10 @@ import { fakeAllData } from "../fakeData/FakeData";
 
 import ReviewItem from "../ReviewItem/ReviewItem";
 import happyImage from "../../images/giphy.gif";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const removeItems = (productKey) => {
     const newCart = cart.filter((pd) => pd.key !== productKey);
@@ -32,10 +33,8 @@ const Review = () => {
     setCart(cartProducts);
   }, []);
   const [orderPlace, setOrderPlace] = useState(false);
-  const handlePlaceOrder = () => {
-    setCart([]);
-    setOrderPlace(true);
-    processOrder();
+  const handleProceedCheckout = () => {
+    navigate("/shipment");
   };
 
   let thankyou;
@@ -56,8 +55,8 @@ const Review = () => {
       </div>
       <div className="cart-container">
         <Cart cart={cart}>
-          <button onClick={handlePlaceOrder} className="addBtn">
-            Place Order
+          <button onClick={handleProceedCheckout} className="addBtn">
+            Proceed checkout
           </button>
         </Cart>
       </div>

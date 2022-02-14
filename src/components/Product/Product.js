@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Product.css";
 
-const Product = (props) => {
+const Product = ({ product, handleAddProduct }) => {
   // console.log(props.product.key);
-  const { img, name, seller, price, stock, key } = props.product;
+  // const { product, handleAddProduct } = props;
+  const { img, name, seller, price, stock, key } = product;
   return (
     <div className="product">
       <div>
@@ -24,14 +25,11 @@ const Product = (props) => {
           <small>Only {stock} left in stock..Order soon</small>
         </p>
         <br />
-        {props.showAddToCart === true && (
-          <button
-            className="addBtn"
-            onClick={() => props.handleAddProduct(props.product)}
-          >
+        {
+          <button className="addBtn" onClick={() => handleAddProduct(product)}>
             add to cart
           </button>
-        )}
+        }
       </div>
     </div>
   );
